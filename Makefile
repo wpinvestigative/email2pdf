@@ -87,7 +87,7 @@ pdfs:
 	@mkdir -p $(OUTPUT_DIR)
 	@echo "converting to pdf"
 	@find $(INPUT_DIR) -iname "*\.msg" \
-	| xargs basename \
+	| xargs -n1 basename \
 	| xargs -I% \
 		./email2pdf \
 			--input-encoding ISO-8859-1 \
