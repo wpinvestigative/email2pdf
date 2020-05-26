@@ -1,0 +1,21 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+beautifulsoup4 = ">=4.6.3"
+html5lib = "*"
+lxml = "*"
+pdfminer3k = "*"
+python-magic = "*"
+reportlab = "*"
+PyPDF2 = "*"
+msg-parser = "*"
+ipython = "*"
+ipdb = "*"
+
+[requires]
+python_version = "3.8"
