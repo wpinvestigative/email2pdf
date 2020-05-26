@@ -82,13 +82,14 @@ OUTPUT_DIR=$(ROOT_DIR)
 	@echo "moving files to tmp"
 	@find $(SOURCE_DIR) -name "*.msg" -exec mv {} $(TMP_DIR)/emails \;
 
-pdfs: /tmp/emails
+INPUT_DIR=$(TMP_DIR)/emails
+pdfs:
 	@mkdir -p $(OUTPUT_DIR)
 	@echo "converting to pdf"
-	@find $^ -iname "*\.msg" \
+	@find $(INPUT_DIR) -iname "*\.msg" \
 	| xargs basename \
 	| xargs -I% \
 		./email2pdf \
 			--input-encoding ISO-8859-1 \
-			-i $^/"%" \
+			-i $(INPUT_DIR)/"%" \
 			-o $(OUTPUT_DIR)/"%.pdf"
