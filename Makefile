@@ -24,9 +24,9 @@ builddeb_real:
 	cp README* $(TEMPDIR)/usr/share/doc/email2pdf
 	cp LICENSE* $(TEMPDIR)/usr/share/doc/email2pdf
 	cp getmailrc.sample $(TEMPDIR)/usr/share/doc/email2pdf
-	fakeroot chmod -R u=rwX,go=rX $(TEMPDIR)
-	fakeroot chmod -R u+x $(TEMPDIR)/usr/bin
-	fakeroot dpkg-deb --build $(TEMPDIR) .
+	sudo chmod -R u=rwX,go=rX $(TEMPDIR)
+	sudo chmod -R u+x $(TEMPDIR)/usr/bin
+	sudo dpkg-deb --build $(TEMPDIR) .
 
 buildarch: determineversion
 	makepkg --skipinteg
