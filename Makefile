@@ -71,3 +71,24 @@ profile: .email2pdf.profile
 	python3 performance/printstats.py | less
 
 alltests: unittest analysis coverage
+
+ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+SOURCE_DIR=$(HOME)
+TMP_DIR=/tmp
+OUTPUT_DIR=$(ROOT_DIR)
+
+/tmp/emails:
+	@mkdir -p $(TMP_DIR)/emails
+	@echo "moving files to tmp"
+	@find $(SOURCE_DIR) -name "*.msg" -exec mv {} $(TMP_DIR)/emails \;
+
+pdfs: /tmp/emails
+	@mkdir -p $(OUTPUT_DIR)
+	@echo "converting to pdf"
+	@find $^ -iname "*\.msg" \
+	| xargs basename \
+	| xargs -I% \
+		./email2pdf \
+			--input-encoding ISO-8859-1 \
+			-i $^/"%" \
+			-o $(OUTPUT_DIR)/"%.pdf"
